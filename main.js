@@ -44,7 +44,7 @@ function goClicked(event){
 
 function getWebcam(event) {
   // var $webcam = $('#webcam').val().split(", ");
-  var zipcode = $("#inputZipcode").val();
+  var zipcode = $("#inputCurrentForecast").val();
   // console.log(zipcode);
   var promise = $.getJSON('http://api.wunderground.com/api/eadf1ca63ecac737/webcams/q/' + zipcode + '.json');
 
