@@ -7,6 +7,7 @@ function init() {
   // $('#getLocalWeatherForecast').click(go);
   $('#threeDayLowForecast').click(get3DayWeatherForecast);
   $('#threeDayHiForecast').click(get3DayWeatherForecast);
+  $('#webcam').click(getWebcam);
   // $('#weatherCondition').click(weatherCondition);
 };
 
@@ -39,6 +40,22 @@ function goClicked(event){
   $('#go').text(currentForecast);
   $('#mainImage').attr("src", data.current_observation.icon_url);
   });
+}
+
+function getWebcam(event) {
+  var zipcode = $("#inputCurrentForecast").val();
+  console.log(zipcode);
+  var promise = $.getJSON('http://api.wunderground.com/api/eadf1ca63ecac737/webcams/q/CA/San_Francisco.json');
+
+
+  promise.success(function(data) {
+      console.log('success data:', data.webcams[0].CURRENTIMAGEURL);
+
+    var webcam = (data.webcams[0].CURRENTIMAGEURL);
+    console.log(webcam);
+
+  $('#mainImage').attr("src", data.webcams[0].CURRENTIMAGEURL);
+  })
 }
 
 // function weatherCondition(e) {
