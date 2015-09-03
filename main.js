@@ -7,6 +7,7 @@ function init() {
   // $('#getLocalWeatherForecast').click(go);
   $('#threeDayLowForecast').click(get3DayWeatherForecast);
   $('#threeDayHiForecast').click(get3DayWeatherForecast);
+  $('#webcam').click(getWebcam);
   // $('#weatherCondition').click(weatherCondition);
 };
 
@@ -39,6 +40,44 @@ function goClicked(event){
   $('#go').text(currentForecast);
   $('#mainImage').attr("src", data.current_observation.icon_url);
   });
+}
+
+function getWebcam(event) {
+  // var $webcam = $('#webcam').val().split(", ");
+  var zipcode = $("#inputZipcode").val();
+  // console.log(zipcode);
+  var promise = $.getJSON('http://api.wunderground.com/api/eadf1ca63ecac737/webcams/q/' + zipcode + '.json');
+
+
+  promise.success(function(data) {
+      console.log('success data:', data.webcams[0].CURRENTIMAGEURL);
+
+      // var $tds = [];
+
+      // for (var i = 0; i < 0; i++) {
+      //   var $img = $('<img>');
+      //   $img.addClass('camframes';
+      //     $img.attr('alt', 'webcam');
+      //     $img.attr('src', data.webcams[i].CURRENTIMAGEURL);
+
+      //     var $td = $('<td>');
+      //     $td.append($img);
+      //     $tds.push($td);
+      // }
+
+      // var $firstTds = $tds.splice(3)
+
+      // var $tr1 = $('<tr>').append($tds);
+      // var $tr2 = $('<tr>').append($secondTds);
+
+      // $('#tableBody').append($tr1, $tr2);
+
+
+    var webcam = (data.webcams[0].CURRENTIMAGEURL);
+    console.log(webcam);
+
+  $('#mainImage').attr("src", data.webcams[0].CURRENTIMAGEURL);
+  })
 }
 
 // function weatherCondition(e) {
